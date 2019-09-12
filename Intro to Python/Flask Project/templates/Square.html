@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<title>Lab 2: Coordinate Systems, Indexed Buffers</title>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+// vertex position
+attribute vec4 vPosition;
+
+// Need this when you have vertex colors
+attribute vec4 vColor; 
+//
+// need this to pass color to fragment shader
+varying vec4 fColor;
+//
+
+void main()
+{
+// if you are using vertex colors you need to assign it to fColor
+	fColor = vColor;
+
+	gl_Position = vPosition;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float; 
+
+// need it if you are receiving vertex colors
+ varying vec4 fColor;
+
+void main()
+{
+	// use this if you are getting colors from vertex shader 
+	gl_FragColor = fColor;
+}
+</script>
+
+<script type="text/javascript" src="Common/webgl-utils.js"></script>
+<script type="text/javascript" src="Common/initShaders.js"></script>
+<script type="text/javascript" src="Common/MV.js"></script>
+<script type="text/javascript" src="Square.js"></script>
+</head>   
+
+<body>
+	<h1>Use numbers 1-4 to change drawing mode</h1>
+	<ul>
+		<li>1: gl.TRIANGLE_FAN</li>
+		<li>2: gl.LINE_LOOP</li>
+		<li>3: gl.TRIANGLES</li>
+		<li>4: gl.TRIANGLE_STRIP</li>
+	</ul>
+
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+
+<p>Click on the canvas to generate coordinate report</p>
+<p id="deviceCoords">Device Coordinates: </p>
+<p id="worldCoords">World Coordinates: </p>
+<p id="normalized">Normalized Device Coordinates (From World): </p>
+
+<p id="NDC">Normalized Device Coordinates (From Device): </p>
+
+<form id="worldCoordinateInput">
+	<p>
+		<label>
+			World X min: <input id="xmin" type="number" value="0">
+		</label>
+		<label>
+			World Y min: <input id="ymin" type="number" value="0">
+		</label>
+	</p>
+	<p>
+		<label>
+			World X max: <input id="xmax" type="number" value="100">
+		</label>
+		<label>
+			World Y max: <input id="ymax" type="number" value="100">
+		</label>
+	</p>
+
+	<input id="update" type="submit" value="Update Coordinates!">
+</form>
+
+<p>Bonus: Refresh page for new colors!</p>
+</body>
+</html>
