@@ -10,6 +10,7 @@ def execute(pieces):
 
     state = states['getPreOp']
     pointer = 0
+    num = 0
     while state != states['error']:
         if pieces[pointer] == '=':
             try:
